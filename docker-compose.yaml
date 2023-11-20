@@ -1,0 +1,40 @@
+services:
+  backend:
+    container_name: backend_php
+    ports:
+      - '8000:80'
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/app
+    build:
+      context: app
+    volumes:
+      - .:/var/www/html
+      - ./config/vhost.conf:/etc/apache2/sites-enabled/000-default.conf
+      - cache:/var/www/html/app/var/cache
+      - log:/var/www/html/app/var/log
+
+  database:
+    container_name: db
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: user_management
+      MYSQL_USER: app
+      MYSQL_PASSWORD: app
+    ports:
+      - '4406:3306'
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./config/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      - cache:/var/www/html/app/var/cache
+      - log:/var/www/html/app/log
+
+  adminer:
+    container_name: db_adminer
+    image: adminer
+    ports:
+      - '8001:8080'
+
+volumes:
+  cache:
+  log:

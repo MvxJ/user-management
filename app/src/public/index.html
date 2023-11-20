@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" type="text/css" href="src/public/assets/css/main.css">
+</head>
+<body class="bg-slate-900 text-slate-200">
+    <header class="container mx-auto">
+        <div>
+            <h1>User Management App!</h1>
+        </div>
+        <nav>
+            <ul class="flex p-5">
+                <li class="mr-5"><a href="#" id="usersTab">Users</a></li>
+                <li><a href="#" id="groupsTab">Groups</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container mx-auto min-h-full p-5">
+        <div id="usersView" class="content-view">
+            <h2>Users List</h2>
+            <ul id="userList"></ul>
+        </div>
+
+        <div id="groupsView" class="content-view" style="display: none;">
+            <h2>Groups List</h2>
+            <ul id="groupList"></ul>
+        </div>
+
+        <div id="userDetails" class="content-view" style="display: none;">
+            <h2>User Details</h2>
+            <div id="userDetailsContent"></div>
+        </div>
+
+        <div id="groupDetails" class="content-view" style="display: none;">
+            <h2>Group Details</h2>
+            <div id="groupDetailsContent"></div>
+        </div>
+    </main>
+    <footer class="container mx-auto flex justify-center">
+        <p>&copy;Maksymilian Jachymczak</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="src/public/assets/js/groups.js"></script>
+    <script src="src/public/assets/js/users.js"></script>
+</body>
+</html>
