@@ -218,7 +218,7 @@ $(document).ready(function () {
             surname: $('#surname').val(),
             username: $('#username').val(),
             birthDate: $('#birthDate').val(),
-            groups: $('#groups').val() === null || $('#users').val() === undefined ? [] : $('#groups').val()
+            groups: $('#groups').val() === null || $('#groups').val() === undefined ? [] : $('#groups').val()
         }
 
         if (userId === undefined) {

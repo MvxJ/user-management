@@ -11,3 +11,8 @@ Open the root directory and paste: ```docker compose up -d --build```
 ### Access
 1. App - localhost:8000
 2. Database adminer - localhost:8001
+
+#### Database Login
+1. Host - database
+2. Username - app
+3. Password - app
