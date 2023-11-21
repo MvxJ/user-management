@@ -63,7 +63,7 @@ class UserController
             http_response_code(201);
             $response['status'] = 'success';
             $response['message'] = 'User created successfully';
-            $response['results'] = $user;
+            $response['results'] = ['id' => $user->getId()];
 
             echo json_encode($response);
         } catch (\Exception $exception) {
@@ -84,7 +84,7 @@ class UserController
             http_response_code(200);
             $response['status'] = 'success';
             $response['message'] = 'User updated successfully';
-            $response['results'] = $user;
+            $response['results'] = ['id' => $user->getId()];
 
             echo json_encode($response);
         } catch (\Exception $exception) {

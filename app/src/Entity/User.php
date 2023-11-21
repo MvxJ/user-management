@@ -74,17 +74,19 @@ class User
         return $this->birthDate;
     }
 
-    public function setBirthDate(\DateTime $birthDate): void
+    public function setBirthDate(string $birthDate): void
     {
-        $this->birthDate = $birthDate;
+        $this->birthDate = new \DateTime($birthDate);
     }
 
-    public function addGroup(Group $group): void
+    public function addGroup(Group $group): self
     {
         $groupId = $group->getId();
         if (!isset($this->groups[$groupId])) {
             $this->groups[$groupId] = $group;
         }
+
+        return $this;
     }
 
     public function removeGroup(Group $group): void
@@ -93,6 +95,11 @@ class User
         if (isset($this->groups[$groupId])) {
             unset($this->groups[$groupId]);
         }
+    }
+
+    public function setGroups(array $groups): void
+    {
+        $this->groups = $groups;
     }
 
     public function getGroups(): array

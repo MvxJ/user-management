@@ -61,7 +61,7 @@ class GroupController
             http_response_code(200);
             $response['status'] = 'success';
             $response['message'] = 'Group created successfully';
-            $response['results'] = $group;
+            $response['results'] = ['id' => $group->getId()];
 
             echo json_encode($response);
         } catch (\Exception $exception) {
@@ -82,7 +82,7 @@ class GroupController
             http_response_code(200);
             $response['status'] = 'success';
             $response['message'] = 'Group updated successfully';
-            $response['results'] = $group;
+            $response['results'] = ['id' => $group->getId()];
 
             echo json_encode($response);
         } catch (\Exception $exception) {

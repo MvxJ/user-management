@@ -1,0 +1,130 @@
+.table {
+    border: 1px solid #e2e8f0;
+}
+
+.table th, .table td {
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+td.actions {
+    text-align: right;
+}
+
+th {
+    border: 1px solid #e2e8f0;
+}
+
+td {
+    border: 1px solid #e2e8f0;
+}
+
+.table td.actions span {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    margin: 0.1rem;
+    cursor: pointer;
+    color: #4a5568;
+    background-color: #e2e8f0;
+    border: 1px solid #cbd5e0;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.table td.actions span:hover {
+    background-color: #3490dc;
+    color: #ffffff;
+}
+
+.navigation-tab {
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    border-bottom: 1px solid rgb(71 85 105);
+}
+
+.navigation-tab.active {
+    background-color: rgb(71 85 105);
+    color: rgb(59 130 246);
+    border-bottom: 2px solid rgb(59 130 246);
+}
+
+.actions-bar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form-select {
+    background-color: rgb(15 23 42) !important;
+    color: rgb(226 232 240) !important;
+}
+
+.btn {
+    height: 35px;
+    min-width: 50px;
+    max-width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5px 0 5px;
+    border-radius: 5px;
+    background-color: rgb(59 130 246);
+    color: white;
+    margin-bottom: 5px;
+    transition: 0.1s ease-in-out;
+}
+
+.btn:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+}
+
+.action-btn {
+    display: inline-block;
+    height: 35px;
+    padding: 5px;
+    width: auto;
+    transition: 0.1s ease-in-out;
+}
+
+.action-btn:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.action-btn.info {
+    color: rgb(59 130 246);
+}
+
+.action-btn.danger {
+    color: rgb(220 38 38);
+}
+
+.action-btn.warning {
+    color: rgb(251 191 36);
+}
+
+#body input {
+    background-color: rgb(15 23 42);
+    border: 1px solid #e2e8f0;
+    color: #e2e8f0;
+    height: 35px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+    border-radius: 5px;
+}
+
+#liveToast {
+    color: rgb(15 23 42) !important;
+    background-color: aquamarine !important;
+}
+
+#liveToast.error {
+    background-color: rgb(220 38 38) !important;
+}

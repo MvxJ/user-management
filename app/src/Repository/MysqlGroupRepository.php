@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Database\DatabaseConnectionFactory;
 use App\Entity\Group;
+use App\Entity\User;
 use PDO;
 
 class MysqlGroupRepository implements GroupRepositoryInterface
@@ -68,6 +69,28 @@ class MysqlGroupRepository implements GroupRepositoryInterface
         $stmt->execute();
     }
 
+    public function getGroupWithUsers(int $id): ?Group
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM groups WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_CLASS, Group::class);
+
+        /** @var Group $group */
+        $group = $stmt->fetch();
+
+        if ($group) {
+            $users = $this->getGroupUsers($group->getId());
+
+            /** @var User $user */
+            foreach ($users as $user) {
+                $group->addUser($user);
+            }
+        }
+
+        return $group;
+    }
+
     private function deleteGroupFromUsers(int $groupId): void
     {
         $stmt = $this->pdo->prepare("DELETE FROM user_group WHERE group_id = :group_id");
@@ -76,17 +99,30 @@ class MysqlGroupRepository implements GroupRepositoryInterface
 
     private function updateGroupUsers(Group $group): void
     {
-        $stmtDelete = $this->pdo->prepare("DELETE FROM user_groups WHERE group_id = :group_id");
+        $stmtDelete = $this->pdo->prepare("DELETE FROM user_group WHERE group_id = :group_id");
         $stmtDelete->execute([':group_id' => $group->getId()]);
 
+        /** @var User $user */
         foreach ($group->getUsers() as $user) {
             $stmtInsert = $this->pdo->prepare(
-                "INSERT INTO user_groups (user_id, group_id) VALUES (:user_id, :group_id)"
+                "INSERT INTO user_group (user_id, group_id) VALUES (:user_id, :group_id)"
             );
             $stmtInsert->execute([
                 ':user_id' => $user->getId(),
                 ':group_id' => $group->getId(),
             ]);
         }
+    }
+
+    private function getGroupUsers(int $groupId): array
+    {
+        $stmt = $this->pdo->prepare("SELECT u.* FROM users u JOIN user_group ug ON u.id = ug.user_id WHERE ug.group_id = :groupId");
+        $stmt->bindParam(':groupId', $groupId, PDO::PARAM_INT);
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, User::class);
+
+        $users = $stmt->fetchAll();
+
+        return $users;
     }
 }
